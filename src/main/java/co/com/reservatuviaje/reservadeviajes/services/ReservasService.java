@@ -47,15 +47,17 @@ public class ReservasService {
                         "Ninguna reserva encontrado").getMostSpecificCause()));
     }
 
+
     public Mono<Void> eliminarTodasLasReservas() {
         return reservasRepository.deleteAll()
                 .onErrorResume(throwable -> {
                     LOGGER.error("Error al borrar todas las reservas", throwable);
                     return Mono.empty();
                 })
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Reservas no eliminadas").getMostSpecificCause()));
+                .then();
     }
+
+
 
     public Mono<Reservas> eliminarReserva(Integer id) {
         return reservasRepository.findById(id)

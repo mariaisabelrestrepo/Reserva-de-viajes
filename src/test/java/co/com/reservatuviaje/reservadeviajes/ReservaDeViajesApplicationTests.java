@@ -60,7 +60,7 @@ class ReservaDeViajesApplicationTests {
 		when(reservasRepository.save(any(Reservas.class))).thenReturn(Mono.just(reservaExistente));
 
 		// Act
-		Mono<Reservas> resultado = reservasController.cancelarReserva(id, reservaInput);
+		Mono<Reservas> resultado = reservasController.cancelarReserva(id,reservaInput);
 
 		// Assert
 		StepVerifier.create(resultado)
